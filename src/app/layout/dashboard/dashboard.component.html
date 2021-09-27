@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="col-md-5 border rounded m-2">
+        <h4>List years whit multiple winners</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Win count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of multipleWinners">
+                    <td>
+                        {{item.year}}
+                    </td>
+                    <td>
+                        {{item.winnerCount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 border rounded m-2">
+        <h4>Top 3 studios whith winner </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Win count
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of top3; let idx = index">
+                <tr *ngIf="idx <3 ">
+                    <td>
+                        {{item.name}}
+                    </td>
+                    <td>
+                        {{item.winCount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-5 border rounded m-2">
+        <h4>Producers with longest and shortest interval between wins </h4>
+        <h5>Maximum</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Producer
+                    </th>
+                    <th>
+                        Interval
+                    </th>
+                    <th>
+                        Previous Year
+                    </th>
+                    <th>
+                        Following Win
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of interval?.max; let idx = index">
+                <tr *ngIf="idx <3 ">
+                    <td>
+                        {{item.producer}}
+                    </td>
+                    <td>
+                        {{item.interval}}
+                    </td>
+                    <td>{{item.previousWin}}</td>
+                    <td>{{item.followingWin}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Minimun</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Producer
+                    </th>
+                    <th>
+                        Interval
+                    </th>
+                    <th>
+                        Previous Year
+                    </th>
+                    <th>
+                        Following Win
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of interval?.min; let idx = index">
+                <tr *ngIf="idx <3 ">
+                    <td>
+                        {{item.producer}}
+                    </td>
+                    <td>
+                        {{item.interval}}
+                    </td>
+                    <td>{{item.previousWin}}</td>
+                    <td>{{item.followingWin}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 border rounded m-2">
+        <h4>List movie winners by year</h4>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by year" aria-label="Search by year"
+                [(ngModel)]="yearFilter" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-info" type="button" (click)="filterWithYear(yearFilter)">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+
+                </button>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Title
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of movies; let idx = index">
+                <tr >
+                    <td>
+                        {{item.id}}
+                    </td>
+                    <td>
+                        {{item.year}}
+                    </td>
+                    <td>{{item.title}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

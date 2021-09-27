@@ -1,0 +1,59 @@
+<div [@routerTransition]>
+    <div *ngIf="loading"  class="row mb-3" style="height: calc(100vh - 205px); overflow: auto">
+       <span>
+        <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        Carregando</span>
+    </div>
+    <div *ngIf="!loading" class="row mb-3" style="height: calc(100vh - 155px); overflow: auto">
+        <table *ngIf="!loading" class="table table-bordered table-sm m-0" aria-describedby="table">
+            <thead>
+                <tr style="font-weight: bold;">
+                    <th>id</th>
+                    <th style="max-width: 70px;">Year
+                        <input class="form-control input-sm" [(ngModel)]="yearFilter" (change)="filterYear()">
+                    </th>
+                    <th>Title</th>
+                    <th style="max-width: 70px;">Winner
+                        <select class="form-control input-sm" [(ngModel)]="winnerFilter" (change)="filterYear()">
+                            <option value="null" >Sim/Não</option>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of result?.content" style="font-size: 0.7rem; font-weight: bold;">
+                   <td  style="text-align: center;">{{reg.id}}</td>
+                   <td  style="text-align: center;">{{reg.year}}</td>
+                   <td>{{reg.title}}</td>
+                   <td style="text-align: center;">
+                       <i *ngIf="reg.winner" class="fa fa-check" aria-hidden="true"></i>
+                       <i *ngIf="!reg.winner" class="fa fa-remove" aria-hidden="true"></i>
+
+                   </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer id="sticky-footer" class="py-1  " style="padding: 0">
+        <div class=" row flex space-between">
+            <div class="col-md-2">
+                Resultados: {{total}}
+            </div>
+            <div class="col-md-8 " >
+                <pagination  [totalItems]="total" (ngModel)="page" (pageChanged)="go($event.page)" [maxSize]="5"
+                    (numPages)="totPag" [boundaryLinks]="true" [itemsPerPage]="pageSize" [rotate]="true">
+                </pagination>
+            </div>
+            <div class="col-md-2 text-right">
+                <a href="javascript:window.history.go(-1)" class="btn btn-danger btn-sm">
+                    <em class="fa fa-undo"></em>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</div>
